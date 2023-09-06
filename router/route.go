@@ -10,5 +10,6 @@ func SetupRoutes(dbConnection *gorm.DB, app *fiber.App) {
 	api := app.Group("/api")
 	v1 := api.Group("/v1")
 	companies := v1.Group("/companies")
-	companies.Get("/", controller.GetCommpanies)
+	companies.Get("/", controller.GetCompanies)
+	companies.Get("/:id", controller.GetCompany)
 }
