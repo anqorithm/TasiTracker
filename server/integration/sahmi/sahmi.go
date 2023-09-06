@@ -1,4 +1,4 @@
-package sahmi
+package integrations
 
 import (
 	"encoding/json"

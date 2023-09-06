@@ -35,7 +35,7 @@ func GetCompanies(c *fiber.Ctx) error {
 	var companies []model.Company
 	var total int64
 	db.Model(&model.Company{}).Count(&total)
-	db.Preload("TodayPoints").Offset(offset).Limit(limit).Find(&companies)
+	db.Offset(offset).Limit(limit).Find(&companies)
 	if len(companies) == 0 {
 		return c.Status(404).JSON(fiber.Map{"status": "error", "message": "Companies not found", "data": nil})
 	}

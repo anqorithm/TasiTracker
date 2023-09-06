@@ -1,16 +1,16 @@
 version: '3.9'
 
 services:
-  app:
-    build:
-      context: .
-      dockerfile: ./docker/Dockerfile
-    ports:
-      - 8080:8080
-    networks:
-      - tasitracker
-    depends_on:
-      - postgres
+  # app:
+  #   build:
+  #     context: .
+  #     dockerfile: ./docker/Dockerfile
+  #   ports:
+  #     - 8080:8080
+  #   networks:
+  #     - tasitracker
+  #   depends_on:
+  #     - postgres
   postgres:
     image: postgres
     ports:
@@ -19,8 +19,8 @@ services:
       POSTGRES_USER: tasitracker
       POSTGRES_PASSWORD: tasitracker
       POSTGRES_DB: tasitracker
-    volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+    # volumes:
+    #   - ./postgres_data:/var/lib/postgresql/data
     networks:
       - tasitracker
   pgadmin:
@@ -35,7 +35,7 @@ services:
       - postgres
     networks:
       - tasitracker
-volumes:
-  postgres_data:
+# volumes:
+#   postgres_data:
 networks:
   tasitracker:
