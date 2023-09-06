@@ -2,7 +2,6 @@ package controller
 
 import (
 	"errors"
-	"fmt"
 	"math"
 	"strconv"
 
@@ -15,7 +14,6 @@ import (
 func GetCompany(c *fiber.Ctx) error {
 	db := database.Connect()
 	id := c.Params("id")
-	fmt.Println(id)
 	var company model.Company
 	result := db.Preload("TodayPoints").Where("guid = ?", id).First(&company)
 	if result.Error != nil {
@@ -35,7 +33,7 @@ func GetCompanies(c *fiber.Ctx) error {
 	var companies []model.Company
 	var total int64
 	db.Model(&model.Company{}).Count(&total)
-	db.Offset(offset).Limit(limit).Find(&companies)
+	db.Preload("TodayPoints").Offset(offset).Limit(limit).Find(&companies)
 	if len(companies) == 0 {
 		return c.Status(404).JSON(fiber.Map{"status": "error", "message": "Companies not found", "data": nil})
 	}
